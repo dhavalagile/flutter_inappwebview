@@ -17,7 +17,9 @@ public class Options<T>: NSObject {
     func parse(options: [String: Any?]) -> Options {
         for (key, value) in options {
             if self.responds(to: Selector(key)) {
-                self.setValue(value, forKey: key)
+                if let obj = options[key], let obj1 = obj, !(obj1 is NSNull) {
+                    self.setValue(value, forKey: key)
+                }
             }
         }
         return self
